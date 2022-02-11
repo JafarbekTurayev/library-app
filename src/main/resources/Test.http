@@ -1,0 +1,71 @@
+
+###
+GET http://localhost:80/category/list
+
+<> 2022-02-09T093932.200.json
+<> 2022-02-09T093656.200.json
+<> 2022-02-09T093532.500.json
+<> 2022-02-09T092634.200.json
+
+###
+PUT http://localhost:80/category/1
+Content-Type: application/json
+
+{
+  "name": "Horror"
+}
+
+<> 2022-02-09T100534.200.json
+
+###
+POST http://localhost:80/category
+Content-Type: application/json
+
+{
+  "name": "English"
+}
+
+###
+POST http://localhost/library
+Content-Type: application/json
+
+{
+  "name": "Alisher Navoiy",
+  "street": "A T ko'cha",
+  "home": "Chilonzor",
+  "city": "Toshkent"
+}
+
+###
+PUT http://localhost/library/2
+Content-Type: application/json
+
+{
+  "name": "Alisher",
+  "street": "A T",
+  "home": "Chi",
+  "city": "Toshken"
+}
+
+###
+POST http://localhost/book
+Content-Type: application/json
+
+{
+  "name": "chala kitob",
+  "categoryIds": [
+    1,
+    2
+  ],
+  "libraryId": 1
+}
+
+###
+GET http://localhost/book
+
+###
+GET http://localhost/book/search?name=cha
+
+###
+#GET http://localhost/library/search?name=A&city=A
+

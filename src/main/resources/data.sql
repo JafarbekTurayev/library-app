@@ -1,0 +1,1 @@
+insert into category(name) values ('Jahon'),('O`zbek'),('Badiiy')
