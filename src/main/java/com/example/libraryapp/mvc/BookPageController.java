@@ -45,14 +45,14 @@ public class BookPageController {
         Optional<Book> byId = bookRepository.findById(id);
         Book book = byId.get();
         model.addAttribute("book", book);
-        return "/book/book-details";
+        return "book-details";
     }
 
     @GetMapping("/add")
     public String addLibPage(Model model) {
         model.addAttribute("libraryList", libraryRepository.findAll());
         model.addAttribute("categoryList", categoryRepository.findAll());
-        return "/book/add-book";
+        return "add-book";
     }
 
     @PostMapping("/add")
@@ -67,7 +67,7 @@ public class BookPageController {
         model.addAttribute("book", bookRepository.findById(id).get());
         model.addAttribute("libraryList", libraryRepository.findAll());
         model.addAttribute("categoryList", categoryRepository.findAll());
-        return "/book/book-edit";
+        return "book-edit";
     }
 
     @PostMapping("/edit/{id}")
