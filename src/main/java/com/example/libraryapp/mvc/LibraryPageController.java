@@ -1,6 +1,5 @@
 package com.example.libraryapp.mvc;
 
-import com.example.libraryapp.dto.ApiResponse;
 import com.example.libraryapp.dto.LibraryDto;
 import com.example.libraryapp.entity.Library;
 import com.example.libraryapp.repository.LibraryRepository;
@@ -24,7 +23,7 @@ public class LibraryPageController {
     @GetMapping
     public String getLib(Model model) {
         model.addAttribute("libraries", libraryRepository.findAll());
-        return "admin-lib";
+        return "/library/admin-lib";
     }
 
     @GetMapping("/{id}")
