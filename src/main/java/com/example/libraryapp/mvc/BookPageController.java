@@ -1,9 +1,7 @@
 package com.example.libraryapp.mvc;
 
 import com.example.libraryapp.dto.BookDTO;
-import com.example.libraryapp.dto.LibraryDto;
 import com.example.libraryapp.entity.Book;
-import com.example.libraryapp.entity.Library;
 import com.example.libraryapp.repository.BookRepository;
 import com.example.libraryapp.repository.CategoryRepository;
 import com.example.libraryapp.repository.LibraryRepository;
