@@ -31,13 +31,13 @@ public class BookPageController {
         model.addAttribute("books", bookRepository.findAllByNameContainingIgnoreCase(name));
 //        model.addAttribute("categoryList", bookRepository.findAllByNameContains(name));
 //        model.addAttribute("books", bookRepository.fi0 = {$Proxy136@13732} ndAllByNameContains(name));
-        return "admin-book";
+        return "/book/admin-book";
     }
 
     @GetMapping
     public String getBook(Model model) {
         model.addAttribute("books", bookRepository.findAll());
-        return "admin-book";
+        return "/book/admin-book";
     }
 
     @GetMapping("/{id}")
