@@ -7,6 +7,7 @@ import com.example.libraryapp.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,8 @@ public class Categoryservice {
     public ApiResponse add(CategoryDTO categoryDTO) {
         Category category = new Category();
         category.setName(categoryDTO.getName());
+        String time = categoryDTO.getTime();
+        category.setCreatedAt(Timestamp.valueOf(time));
         Category save = categoryRepository.save(category);
 
         return new ApiResponse("Added", true, save);
