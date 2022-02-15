@@ -13,10 +13,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -68,5 +70,57 @@ public class AttachmentService {
                 .contentType(MediaType.valueOf(attachment.getType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "file")
                 .body(attachmentContent.getBytes());
+    }
+
+    @SneakyThrows
+    public ApiResponse uploadFileSystem(MultipartHttpServletRequest request) {
+        Iterator<String> fileNames = request.getFileNames();
+
+        while (fileNames.hasNext()) {
+            List<MultipartFile> files = request.getFiles(fileNames.next());
+            if (files.size() > 0) {
+                for (MultipartFile file : files) {
+                    Attachment attachment = new Attachment(
+                            file.getOriginalFilename(),
+                            file.getSize(),
+                            file.getContentType()
+                    );
+                    Attachment save = attachmentRepository.save(attachment);
+                    //menyu.jpg
+                    File upload = new File("src/main/resources/files/" + save.getName());
+                    FileOutputStream outputStream = new FileOutputStream(upload);
+                    outputStream.write(file.getBytes());
+                    outputStream.close();
+                }
+            }
+        }
+        return new ApiResponse("Zor", true);
+    }
+
+
+//    @SneakyThrows
+//    public void getFile(Integer id, HttpServletResponse response) {
+//        Optional<Attachment> byId = attachmentRepository.findById(id);
+//        Attachment attachment = byId.get();
+//
+//        response.setHeader("Content-Disposition", attachment.getName());
+//        response.setContentType(attachment.getType());
+//        FileInputStream inputStream = new FileInputStream("src/main/resources/files/" + attachment.getName());
+//        FileCopyUtils.copy(inputStream, response.getOutputStream());
+//    }
+
+
+    //sanjar version
+    @SneakyThrows
+    public HttpEntity<?> getFile(Integer id) {
+        Optional<Attachment> byId = attachmentRepository.findById(id);
+        Attachment attachment = byId.get();
+
+        FileInputStream inputStream = new FileInputStream("src/main/resources/files/" + attachment.getName());
+        File file = new File("src/main/resources/files/" + attachment.getName());
+        return ResponseEntity.ok()
+                .contentType(MediaType.valueOf(attachment.getType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "file")
+                .body(inputStream.readAllBytes());
     }
 }
