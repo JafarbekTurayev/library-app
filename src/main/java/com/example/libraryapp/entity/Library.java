@@ -24,4 +24,9 @@ public class Library {
     @JsonIgnore
     @OneToMany(mappedBy = "library")
     private List<Book> books;
+
+    public Library(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 }

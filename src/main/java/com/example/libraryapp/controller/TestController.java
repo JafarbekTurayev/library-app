@@ -1,5 +1,6 @@
 package com.example.libraryapp.controller;
 
+import com.example.libraryapp.component.Config;
 import com.example.libraryapp.component.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,12 @@ public class TestController {
     @Autowired
     Test test;
 
+    @Autowired
+    Config config;
+
     @GetMapping("/request")
     public String getPage() {
+//        config.start();
         return test.getRequestScope().getName() + test.getRequestScope().hashCode();
     }
 

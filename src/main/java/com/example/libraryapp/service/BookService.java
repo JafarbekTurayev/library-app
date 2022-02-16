@@ -2,6 +2,7 @@ package com.example.libraryapp.service;
 
 import com.example.libraryapp.dto.ApiResponse;
 import com.example.libraryapp.dto.BookDTO;
+import com.example.libraryapp.dto.BookDTORes;
 import com.example.libraryapp.entity.Book;
 import com.example.libraryapp.entity.Category;
 import com.example.libraryapp.entity.Library;
@@ -9,6 +10,7 @@ import com.example.libraryapp.repository.BookRepository;
 import com.example.libraryapp.repository.CategoryRepository;
 import com.example.libraryapp.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,20 @@ import java.util.Optional;
 @Service
 public class BookService {
 
+//field injection
+//    @Autowired (100mb)
+//    BookRepository bookRepository;
+
+    //setter injection
+    @Qualifier("ketmon")
+    private BookRepository bookRepository;
+
     @Autowired
-    BookRepository bookRepository;
+    public void setBookRepository(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+
     @Autowired
     LibraryRepository libraryRepository;
 
@@ -71,5 +85,11 @@ public class BookService {
         if (!bookRepository.existsById(id)) return new ApiResponse("Xatolik", false);
         bookRepository.deleteById(id);
         return new ApiResponse("Delete", true);
+    }
+
+    public ApiResponse getAllByLibraryId(Integer id) {
+//        List<BookDTORes> all = bookRepository.getAllByLibraryId(id);
+//        return new ApiResponse("Mana", true, all);
+        return null;
     }
 }

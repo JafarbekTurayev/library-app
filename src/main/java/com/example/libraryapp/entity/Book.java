@@ -33,4 +33,8 @@ public class Book {
     @ManyToOne
     private Library library;
 
+    public Book(String name, UUID code) {
+        this.name = name;
+        this.code = code;
+    }
 }

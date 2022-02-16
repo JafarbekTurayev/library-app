@@ -1,8 +1,10 @@
 package com.example.libraryapp.service;
 
+import com.example.libraryapp.component.Config;
 import com.example.libraryapp.dto.ApiResponse;
 import com.example.libraryapp.entity.Attachment;
 import com.example.libraryapp.entity.AttachmentContent;
+import com.example.libraryapp.entity.Category;
 import com.example.libraryapp.repository.AttachmentContentRepository;
 import com.example.libraryapp.repository.AttachmentRepository;
 import lombok.RequiredArgsConstructor;
@@ -109,10 +111,18 @@ public class AttachmentService {
 //        FileCopyUtils.copy(inputStream, response.getOutputStream());
 //    }
 
+    private Config config;
+
+    @Autowired
+    public void setConfig(Config config) {
+        this.config = config;
+    }
 
     //sanjar version
     @SneakyThrows
     public HttpEntity<?> getFile(Integer id) {
+
+
         Optional<Attachment> byId = attachmentRepository.findById(id);
         Attachment attachment = byId.get();
 

@@ -23,4 +23,10 @@ public class Address {
     private String home;
     private String city;
     private String street;
+
+    public Address(String home, String city, String street) {
+        this.home = home;
+        this.city = city;
+        this.street = street;
+    }
 }

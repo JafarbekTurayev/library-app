@@ -69,3 +69,6 @@ GET http://localhost/book/search?name=cha
 ###
 #GET http://localhost/library/search?name=A&city=A
 
+
+###
+GET http://localhost:8080/book/libraryId/1

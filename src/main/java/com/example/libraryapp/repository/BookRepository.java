@@ -1,9 +1,13 @@
 package com.example.libraryapp.repository;
 
+import com.example.libraryapp.dto.BookDTO;
+import com.example.libraryapp.dto.BookDTORes;
 import com.example.libraryapp.entity.Book;
 import com.example.libraryapp.entity.Category;
 import com.example.libraryapp.projection.BookProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -21,5 +25,8 @@ public interface BookRepository
 //    List<Book> findAllByNameContains(String name);
     List<Book> findAllByNameContainingIgnoreCase(String name);
 //    List<BookProjection> findAllByNameContains(String name);
+
+//    @Query(value = "select b from book b  where b.library_id=?1")
+//    List<BookDTORes> getAllByLibraryId(@Param("id") Integer id);
 
 }

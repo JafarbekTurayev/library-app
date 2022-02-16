@@ -42,6 +42,11 @@ public class BookController {
     }
 
 
+    @GetMapping("/libraryId/{id}")
+    public ApiResponse getByLibraryId(@PathVariable Integer id) {
+        return bookService.getAllByLibraryId(id);
+    }
+
     //search?name=""
     @GetMapping("/search")
     public List<BookProjection> search(@RequestParam String name) {
