@@ -22,10 +22,12 @@ public class Book {
     private Integer id;
     private String name;
 
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+//    @Type(type = "org.hibernate.type.PostgresUUIDType")
+//    @GeneratedValue(generator = "uuid2")
+//    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID code = UUID.randomUUID();
+
+
 
     @ManyToMany
     private List<Category> categoryList;

@@ -1,7 +1,7 @@
 package com.example.libraryapp.controller;
 
 import com.example.libraryapp.dto.ApiResponse;
-import com.example.libraryapp.service.AttachmentService;
+//import com.example.libraryapp.service.AttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +15,8 @@ import java.io.File;
 @RequestMapping("/file")
 public class AttachmentController {
 
-    @Autowired
-    AttachmentService attachmentService;
+//    @Autowired
+//    AttachmentService attachmentService;
 
     //db ga saqlash
     //upload
@@ -33,18 +33,18 @@ public class AttachmentController {
 
 
     //file system attachment
-    @PostMapping("/upload/file")
-    public ApiResponse upload(MultipartHttpServletRequest request) {
-        return attachmentService.uploadFileSystem(request);
-    }
+//    @PostMapping("/upload/file")
+//    public ApiResponse upload(MultipartHttpServletRequest request) {
+//        return attachmentService.uploadFileSystem(request);
+//    }
 
 //    @GetMapping("/download/{id}")
 //    public void getFile(@PathVariable Integer id, HttpServletResponse response) {
 //        attachmentService.getFile(id, response);
 //    }
 
-    @GetMapping("/download/file/{id}")
-    public HttpEntity<?> getFile(@PathVariable Integer id) {
-        return attachmentService.getFile(id);
-    }
+//    @GetMapping("/download/file/{id}")
+//    public HttpEntity<?> getFile(@PathVariable Integer id) {
+////        return attachmentService.getFile(id);
+//    }
 }
