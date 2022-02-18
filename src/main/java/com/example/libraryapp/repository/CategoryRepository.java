@@ -19,6 +19,9 @@ public interface CategoryRepository
 //    @Override
 //    Page<Category> findAll(Pageable pageable);
 
+
+//    Page<Category> findAllByCreatedAtBetween(Timestamp begin, Timestamp end);
+
     Page<Category> findAllByCreatedAtBetween(Pageable pageable, Timestamp begin, Timestamp end);
 
 

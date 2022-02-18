@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,27 @@ public class CategoryController {
     Categoryservice categoryservice;
     @Autowired
     CategoryRepository categoryRepository;
+
+    @GetMapping("/date")
+    public Page<Category> getDate(
+            @RequestParam(value = "begin", defaultValue = AppConstants.DEFAULT_BEGIN_DATE) String begin,
+            @RequestParam(value = "end", defaultValue = AppConstants.DEFAULT_END_DATE) String end) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedBeginDate = null;
+        Date parsedEndDate = null;
+        try {
+            parsedBeginDate = dateFormat.parse(begin);
+            parsedEndDate = dateFormat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Timestamp timestamp = new java.sql.Timestamp(parsedBeginDate.getTime());
+        Timestamp timestamp1 = new java.sql.Timestamp(parsedEndDate.getTime());
+
+        return categoryRepository.findAllByCreatedAtBetween(PageRequest.of(0, 2), timestamp, timestamp1);
+
+    }
 
     @GetMapping("/pageable")
     public Page<Category> getByPageable(
@@ -36,6 +60,7 @@ public class CategoryController {
 
         return categoryRepository.findAllByCreatedAtBetween(PageRequest.of(page, size, Sort.by(sort)), begin, end);
     }
+
 
     @GetMapping("/list")
     public List<Category> getAll() {
