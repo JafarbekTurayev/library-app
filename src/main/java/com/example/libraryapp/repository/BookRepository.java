@@ -30,9 +30,8 @@ public interface BookRepository
 //    List<BookDTORes> getAllByLibraryId(@Param("id") Integer id);
 
     //jpql
-//    @Query("select b from Book b where b.library.name like ?1%")
-//    List<Book> getBooksByCategoryList(String name);
-
+    @Query("select b from Book b where b.library.name like ?1%")
+    List<Book> getBooksByCategoryList(String name);
 
 //    List<Book> findAllByCategoryListIn(List<Integer> ids);
 
