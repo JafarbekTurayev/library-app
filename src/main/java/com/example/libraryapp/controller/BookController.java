@@ -2,6 +2,8 @@ package com.example.libraryapp.controller;
 
 import com.example.libraryapp.dto.ApiResponse;
 import com.example.libraryapp.dto.BookDTO;
+import com.example.libraryapp.entity.Book;
+import com.example.libraryapp.entity.Category;
 import com.example.libraryapp.projection.BookProjection;
 import com.example.libraryapp.repository.BookRepository;
 import com.example.libraryapp.repository.CategoryRepository;
@@ -25,6 +27,18 @@ public class BookController {
     BookService bookService;
     @Autowired
     BookRepository bookRepository;
+
+//    @GetMapping("/list")
+//    public List<Book> get(@RequestParam String name) {
+////        List<Category> allById = categoryRepository.findAllById(ids);
+////        return bookRepository.getBooksByCategoryList(name);
+//    }
+
+    @GetMapping("/list")
+    public List<Book> getAll(@RequestParam List<Integer> ids) {
+        return bookRepository.findAllByCategoryListIn(ids);
+    }
+
 
     @PostMapping
     public ApiResponse add(@RequestBody BookDTO bookDTO) {
